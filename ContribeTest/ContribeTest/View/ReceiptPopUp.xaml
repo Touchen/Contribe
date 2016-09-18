@@ -1,0 +1,21 @@
+﻿<Window x:Class="ContribeTest.View.ReceiptPopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wm ="clr-namespace:ContribeTest.ViewModel"
+        Title="ReceiptPopUp" Height="300" Width="300">
+    <Window.Resources>
+        <ResourceDictionary>
+            <wm:ReceiptPopUpViewModel x:Key="ViewModel"></wm:ReceiptPopUpViewModel>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid DataContext="{Binding Source= {StaticResource ViewModel}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.15*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Receipt" FontSize="25" HorizontalAlignment="Center"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding ReceiptView, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Row="2" FontSize="25" HorizontalAlignment="Center" Text="{Binding TotalTextBox, UpdateSourceTrigger=PropertyChanged}"/>        
+    </Grid>
+</Window>

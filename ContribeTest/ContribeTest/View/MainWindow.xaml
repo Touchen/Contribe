@@ -1,0 +1,56 @@
+﻿<Window x:Class="ContribeTest.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wm ="clr-namespace:ContribeTest.ViewModel"
+        Title="BookStore" Height="350" Width="525" ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <wm:MainWindowViewModel x:Key="ViewModel"></wm:MainWindowViewModel>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid DataContext="{Binding Source= {StaticResource ViewModel}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.13*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" Content="Add Book" Command="{Binding Command_Add}"/>
+            <Button Grid.Column="1" Content="Remove Book" Command="{Binding Command_Delete}"/>
+  
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding SearchTextBox,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Column="1" Content="Search For Book" Command="{Binding Command_Search}"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
+               
+                <ListView Grid.Row ="0" ItemsSource="{Binding OrderView}" SelectedIndex= "{Binding OrderViewIndex, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Row ="1" Text="{Binding TotalTextBox}" HorizontalAlignment="Center"/>
+                <Button Grid.Row="2" Content="Order it!"  Command="{Binding Command_Order}"/>
+                
+            </Grid>
+            <ListView Grid.Column ="0" ItemsSource="{Binding BookView}" SelectedIndex="{Binding BookViewIndex, UpdateSourceTrigger=PropertyChanged}"></ListView>
+        </Grid>
+    </Grid>
+</Window>
